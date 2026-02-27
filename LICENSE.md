@@ -1,5 +1,6 @@
 MIT License
 
+Copyright (c) 2026 BadranRaza
 Copyright (c) 2019 Unity Technologies
 Copyright (c) 2019 Microsoft Corporation. All rights reserved.
 

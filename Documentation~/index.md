@@ -1,28 +1,26 @@
-# Code Editor Package for Visual Studio
+# Code Editor Package for Google Antigravity
 
-## About Visual Studio Editor
+## About
 
-The Visual Studio Editor package provides the Unity Editor with support for Unity-specific features from the [Visual Studio Tools for Unity](https://docs.microsoft.com/en-us/visualstudio/gamedev/unity/get-started/visual-studio-tools-for-unity) extension in [Visual Studio](https://visualstudio.microsoft.com/) and [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/). These include IntelliSense auto-complete suggestions, C# editing, and debugging.
+The **Antigravity Editor** package integrates [Google Antigravity](https://antigravity.google) as the external code editor for Unity. It provides:
+
+- Automatic discovery of your Antigravity installation
+- `.sln` and `.csproj` generation for full C# IntelliSense
+- Workspace config setup (`.vscode/launch.json`, `settings.json`, `extensions.json`)
+- Optional single-instance window reuse
 
 ## Installation
 
-This package is a built-in package and installed by default.
-
-**Note**: If you’re using a version of the Unity Editor before 2019.4, you’ll need to install this package through the package manager.
+1. Open `Window > Package Manager` in Unity
+2. Click `+` → **Add package from git URL...**
+3. Enter `https://github.com/BadranRaza/com.unity.ide.antigravity.git`
+4. Click **Add**
 
 ## Requirements
 
-This version of the Visual Studio Editor package is compatible with the following versions of the Unity Editor:
+- Unity 2019.4 or later
+- [Antigravity IDE](https://antigravity.google) installed
 
-* 2019.4 and later
+## Submitting Issues
 
-To use this package, you must have the following third-party products installed:
-
-* **On Windows**: Visual Studio 2019 version 16.9 or newer with Visual Studio Tools for Unity 4.0.9 or newer.
-* **On macOS**: Visual Studio for Mac 2019 version 8.9 or newer with Visual Studio Tools for Unity 2.0.9 or newer.
-
-For more information about using Visual Studio with Unity, see [Microsoft’s Visual Studio Tools for Unity documentation](https://docs.microsoft.com/en-us/visualstudio/gamedev/unity/get-started/visual-studio-tools-for-unity).
-
-## Submitting issues
-
-This package is maintained by Microsoft and Unity. Submit issues directly from Visual Studio and Visual Studio for Mac from the **Help** > **Submit Feedback** > **Report a Problem** menu. Unity will make this package accessible to the public on GitHub in the future.
+Please open issues on the GitHub repository for this package.

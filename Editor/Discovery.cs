@@ -1,5 +1,6 @@
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Unity Technologies.
+ *  Copyright (c) BadranRaza.
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
@@ -9,37 +10,37 @@ using System.IO;
 
 namespace Microsoft.Unity.VisualStudio.Editor
 {
-	internal static class Discovery
-	{
-		public static IEnumerable<IVisualStudioInstallation> GetVisualStudioInstallations()
-		{
-			foreach (var installation in VisualStudioCursorInstallation.GetVisualStudioInstallations())
-				yield return installation;
-			foreach (var installation in VisualStudioCodiumInstallation.GetVisualStudioInstallations())
-				yield return installation;
-		}
+    internal static class Discovery
+    {
+        public static IEnumerable<IVisualStudioInstallation> GetVisualStudioInstallations()
+        {
+            foreach (var installation in AntigravityInstallation.GetVisualStudioInstallations())
+                yield return installation;
+        }
 
-		public static bool TryDiscoverInstallation(string editorPath, out IVisualStudioInstallation installation)
-		{
-			try
-			{
-				if (VisualStudioCursorInstallation.TryDiscoverInstallation(editorPath, out installation))
-					return true;
-				if (VisualStudioCodiumInstallation.TryDiscoverInstallation(editorPath, out installation))
-					return true;
-			}
-			catch (IOException)
-			{
-				installation = null;
-			}
+        public static bool TryDiscoverInstallation(string editorPath, out IVisualStudioInstallation installation)
+        {
+            installation = null;
 
-			return false;
-		}
+            if (string.IsNullOrEmpty(editorPath))
+                return false;
 
-		public static void Initialize()
-		{
-            VisualStudioCursorInstallation.Initialize();
-            VisualStudioCodiumInstallation.Initialize();
-		}
-	}
+            try
+            {
+                if (AntigravityInstallation.TryDiscoverInstallation(editorPath, out installation))
+                    return true;
+            }
+            catch (IOException)
+            {
+                // do not fail if we are not able to retrieve the exact version number
+            }
+
+            return false;
+        }
+
+        public static void Initialize()
+        {
+            AntigravityInstallation.Initialize();
+        }
+    }
 }
