@@ -1,5 +1,11 @@
 # Code Editor Package for Antigravity — Changelog
 
+## [1.0.4] - 2026-03-03
+
+### Fixed
+
+- Removed `AppleEventIntegration.bundle` from this package to avoid duplicate editor plugin-name conflicts when `com.boxqkrtm.ide.cursor` is installed
+
 ## [1.0.3] - 2026-03-03
 
 ### Fixed
