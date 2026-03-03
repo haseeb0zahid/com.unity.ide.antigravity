@@ -1,5 +1,11 @@
 # Code Editor Package for Antigravity — Changelog
 
+## [1.0.2] - 2026-03-03
+
+### Fixed
+
+- Regenerated all package `.meta` GUIDs to prevent GUID conflicts with `com.boxqkrtm.ide.cursor` when both packages are installed in the same project
+
 ## [1.0.0] - 2026-02-27
 
 ### Changed
