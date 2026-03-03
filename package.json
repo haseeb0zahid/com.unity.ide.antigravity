@@ -2,7 +2,7 @@
   "name": "com.unity.ide.antigravity",
   "displayName": "Antigravity Editor",
   "description": "Antigravity editor integration for supporting Google Antigravity as code editor for Unity. Adds support for generating csproj files for intellisense purposes, auto discovery of installations, etc.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "unity": "2019.4",
   "unityRelease": "25f1",
   "dependencies": {
@@ -17,6 +17,6 @@
     "url": "https://github.com/BadranRaza/com.unity.ide.antigravity.git"
   },
   "_upm": {
-    "changelog": "Fixes:\n\n- Regenerated package GUIDs in all .meta files to avoid GUID collisions with com.boxqkrtm.ide.cursor when both packages are installed\n\nIntegration:\n\n- Workspace config (.vscode/) auto-generated for Antigravity\n- Extensions looked up from ~/.antigravity/extensions\n- Fixed uninitialized variable on unsupported platforms\n- Removed orphaned Cursor/Codium meta files"
+    "changelog": "Fixes:\n\n- Disabled AppleEventIntegration plugin in this package to prevent duplicate editor plugin name conflicts when com.boxqkrtm.ide.cursor is also installed\n- Regenerated package GUIDs in all .meta files to avoid GUID collisions with com.boxqkrtm.ide.cursor when both packages are installed\n\nIntegration:\n\n- Workspace config (.vscode/) auto-generated for Antigravity\n- Extensions looked up from ~/.antigravity/extensions\n- Fixed uninitialized variable on unsupported platforms\n- Removed orphaned Cursor/Codium meta files"
   }
 }
