@@ -1,5 +1,11 @@
 # Code Editor Package for Antigravity — Changelog
 
+## [1.0.5] - 2026-03-09
+
+### Fixed
+
+- Removed orphaned `Editor/Plugins.meta` so Unity no longer warns about a missing `Packages/com.unity.ide.antigravity/Editor/Plugins` folder during import
+
 ## [1.0.4] - 2026-03-03
 
 ### Fixed
