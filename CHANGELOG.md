@@ -1,5 +1,13 @@
 # Code Editor Package for Antigravity — Changelog
 
+## [1.0.7] - 2026-05-23
+
+### Changed
+
+- **License reverted to plain MIT.** The PolyForm Noncommercial dual-license briefly introduced in v1.0.6 has been rolled back. The entire package — including v1.0.7 and all earlier versions — is now uniformly governed by the MIT License again. No commercial-license step is required; use freely in personal, commercial and Asset Store projects.
+- README polished for discoverability: added release / Unity version / license / stars / forks badges, "Support the project" section, and a star-the-repo prompt.
+- Added GitHub `FUNDING.yml` so the repo shows a Sponsor button.
+
 ## [1.0.6] - 2026-05-23
 
 ### Fixed
@@ -18,13 +26,7 @@
 - Package display name updated to **Antigravity IDE Editor**; package description refreshed to mention the Antigravity 2.0 split explicitly.
 - Documentation (`README.md`, `Documentation~/index.md`, `Documentation~/using-visual-studio-editor.md`) updated to reflect the IDE rename, new install paths, and product-name detection.
 
-### License
-
-- **License changed from MIT to a dual license** starting with this release:
-  - Inherited upstream code originating from `com.unity.ide.vscode` (© Unity Technologies, © Microsoft Corporation) remains under the **MIT License**.
-  - All new contributions to this fork are released under the **[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0)**.
-  - **Commercial use requires a separate commercial license** from the copyright holder. Open a GitHub issue at https://github.com/BadranRaza/com.unity.ide.antigravity/issues to start the conversation.
-  - Releases up to and including **v1.0.5 remain available under the original MIT License**; the new terms apply to v1.0.6 and later.
+> **Note:** v1.0.6 originally shipped with a PolyForm Noncommercial dual-license. This was rolled back in v1.0.7 — the entire package is MIT-licensed again. Treat the dual-license note from v1.0.6 release notes as withdrawn.
 
 ## [1.0.5] - 2026-03-09
 

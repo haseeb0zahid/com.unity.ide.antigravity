@@ -1,11 +1,19 @@
 # Code Editor Package for Google Antigravity IDE
 
-This package integrates **Google Antigravity IDE** as the external code editor
-for Unity. Antigravity IDE is the VS Code-based code editor in the Antigravity
-product line. It is **not** the same product as the standalone "Antigravity"
-desktop app (the agent-orchestration tool launched as part of Antigravity 2.0
-at Google I/O 2026) — see [Antigravity 2.0 split](#antigravity-20-split)
-below.
+[![Latest release](https://img.shields.io/github/v/release/BadranRaza/com.unity.ide.antigravity?label=release&sort=semver&color=blue)](https://github.com/BadranRaza/com.unity.ide.antigravity/releases/latest)
+[![Unity 2019.4+](https://img.shields.io/badge/Unity-2019.4%2B-black?logo=unity)](https://unity.com/)
+[![License: MIT](https://img.shields.io/github/license/BadranRaza/com.unity.ide.antigravity?color=brightgreen)](LICENSE.md)
+[![GitHub stars](https://img.shields.io/github/stars/BadranRaza/com.unity.ide.antigravity?style=social)](https://github.com/BadranRaza/com.unity.ide.antigravity/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/BadranRaza/com.unity.ide.antigravity?style=social)](https://github.com/BadranRaza/com.unity.ide.antigravity/network/members)
+
+Integrates **Google Antigravity IDE** as the external code editor for Unity.
+Antigravity IDE is the VS Code-based code editor in the Antigravity product
+line. It is **not** the same product as the standalone "Antigravity" desktop
+app (the agent-orchestration tool launched as part of Antigravity 2.0 at
+Google I/O 2026) — see [Antigravity 2.0 split](#antigravity-20-split) below.
+
+If this package saves you time, please ⭐ star the repo — it is the single
+biggest signal that helps other Unity developers find it.
 
 ## Features
 
@@ -20,6 +28,8 @@ below.
 - **Reuse Window**: optional setting to open files in an already-running
   Antigravity IDE window instead of launching a new one. Backed by a scan of
   Antigravity IDE's own `workspaceStorage` directory.
+- **Insider builds supported**: `Antigravity IDE - Insider` /
+  `antigravity-ide-insiders` are discovered on all three platforms.
 
 ## Installation
 
@@ -95,34 +105,19 @@ agent app. Starting in **v1.0.6**, only Antigravity IDE installs are listed.
   [antigravity.google](https://antigravity.google) (the standalone
   Antigravity 2.0 agent app does not work as a Unity script editor)
 
+## Support the project
+
+If this package made your Unity + Antigravity IDE setup work:
+
+- ⭐ **Star the repository** — biggest single thing you can do to help
+  others find it.
+- 💬 Open an issue or discussion if you hit a bug or have a feature request.
+- 💖 [Sponsor on GitHub](https://github.com/sponsors/BadranRaza) to support
+  continued maintenance.
+
 ## License
 
-This package is **dual-licensed** starting with v1.0.6:
-
-- **Inherited upstream code** from `com.unity.ide.vscode`
-  (© Unity Technologies, © Microsoft Corporation) remains under the **MIT
-  License**.
-- **All new contributions** to this fork (the Antigravity IDE integration
-  authored by BadranRaza and contributors) are released under the
-  **[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0)**.
-
-In plain English: free for personal projects, education, research, charity
-and government use. **Commercial use** — including paid products, paid
-services, commercial Asset Store listings, contracted client work or internal
-tooling at a for-profit company — **requires a separate commercial license**
-from the copyright holder.
-
-Releases up to and including **v1.0.5** remain available under the original
-MIT License. The PolyForm Noncommercial terms apply only to **v1.0.6 and
-later** releases.
-
-### Commercial Licensing
-
-To request a commercial license (flat fee, per-seat or revenue-share terms
-are negotiable), open a GitHub issue describing your intended use:
-
-- https://github.com/BadranRaza/com.unity.ide.antigravity/issues
-
-A dedicated contact email will be published in a future release.
-
-See [`LICENSE.md`](LICENSE.md) for the complete legal text.
+[MIT](LICENSE.md). Free to use in personal, commercial and Asset Store
+projects. Includes upstream MIT-licensed code from Unity Technologies and
+Microsoft Corporation (the `com.unity.ide.vscode` package this is forked
+from).

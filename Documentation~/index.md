@@ -30,11 +30,7 @@ external code editor for Unity. It provides:
 
 ## License
 
-Dual-licensed: inherited upstream code remains MIT; new contributions are
-released under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0).
-Commercial use requires a separate commercial license — open an issue at
-https://github.com/BadranRaza/com.unity.ide.antigravity/issues. See the
-package's `LICENSE.md` for full terms.
+MIT. See the package's `LICENSE.md` for full terms.
 
 ## Submitting Issues
 

@@ -2,11 +2,10 @@
   "name": "com.unity.ide.antigravity",
   "displayName": "Antigravity IDE Editor",
   "description": "Antigravity IDE integration for Unity. Adds Google Antigravity IDE (the VS Code-based code editor in the Antigravity product line) as an External Script Editor option, generates .csproj/.sln for IntelliSense, and offers single-instance window reuse. Detects Antigravity IDE specifically and ignores the standalone Antigravity 2.0 agent app.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "unity": "2019.4",
   "unityRelease": "25f1",
-  "license": "SEE LICENSE IN LICENSE.md",
-  "licensesUrl": "https://github.com/BadranRaza/com.unity.ide.antigravity/blob/master/LICENSE.md",
+  "license": "MIT",
   "dependencies": {
     "com.unity.test-framework": "1.1.9"
   },
@@ -19,6 +18,6 @@
     "url": "https://github.com/BadranRaza/com.unity.ide.antigravity.git"
   },
   "_upm": {
-    "changelog": "Fixed:\n\n- Unity no longer routes script opens to the standalone Antigravity 2.0 agent app. Google's I/O 2026 release split the product line into the agent-first \"Antigravity\" desktop app and the VS Code-fork \"Antigravity IDE\"; discovery, External Tools listing, reuse-window process matching, and workspace-storage scanning now target Antigravity IDE exclusively and verify the package.json product name.\n\nChanged:\n\n- Display name updated to \"Antigravity IDE Editor\" and the External Tools entry is now always labelled \"Antigravity IDE\".\n- Insider builds (Antigravity IDE - Insider / antigravity-ide-insiders) are now recognised on Windows, macOS and Linux.\n- License changed from MIT to dual-license: inherited upstream code (Unity Technologies, Microsoft) stays MIT; new contributions are PolyForm Noncommercial 1.0.0. Commercial use requires a separate license — open a GitHub issue. Releases up to v1.0.5 remain available under MIT."
+    "changelog": "Changed:\n\n- License reverted to plain MIT. The brief PolyForm Noncommercial dual-license introduced in v1.0.6 has been rolled back; v1.0.7 and the entire codebase are under the MIT License (same terms as v1.0.5 and earlier).\n- README badges, sponsor link and discoverability metadata added."
   }
 }
