@@ -1,14 +1,23 @@
 # Using the Antigravity Editor Package
 
-## Set Antigravity as External Script Editor
+## Set Antigravity IDE as External Script Editor
 
-1. Open **Unity > Preferences > External Tools** (macOS) or **Edit > Preferences > External Tools** (Windows)
-2. In the **External Script Editor** dropdown, select **Antigravity**
-3. The panel will reload and show additional settings
+1. Install **Antigravity IDE** from
+   [antigravity.google](https://antigravity.google). This is the VS Code-fork
+   code editor — **not** the standalone "Antigravity" agent app (Antigravity
+   2.0), which cannot host script editing.
+2. Open **Unity > Preferences > External Tools** (macOS) or
+   **Edit > Preferences > External Tools** (Windows / Linux).
+3. In the **External Script Editor** dropdown, select **Antigravity IDE**.
+   If you previously had a plain "Antigravity" entry selected, that pointed
+   at the agent app — pick "Antigravity IDE" instead.
+4. The panel will reload and show additional settings.
 
 ## Generate .csproj Files
 
-The package generates `.csproj` and `.sln` files so Antigravity has full C# IntelliSense and Unity API awareness. Use the checkboxes to control which package types get a `.csproj` file:
+The package generates `.csproj` and `.sln` files so Antigravity IDE has full
+C# IntelliSense and Unity API awareness. Use the checkboxes to control which
+package types get a `.csproj` file:
 
 | Setting               | Description                                                          |
 | --------------------- | -------------------------------------------------------------------- |
@@ -25,7 +34,9 @@ Click **Regenerate project files** to apply changes.
 
 ## Workspace Config Files
 
-When opening a project, the package automatically creates or patches these files inside `.vscode/` in your Unity project root (Antigravity reads these as a VS Code-based editor):
+When opening a project, the package automatically creates or patches these
+files inside `.vscode/` in your Unity project root (Antigravity IDE reads
+these as a VS Code-based editor):
 
 | File                      | Purpose                                                                                     |
 | ------------------------- | ------------------------------------------------------------------------------------------- |
@@ -33,8 +44,17 @@ When opening a project, the package automatically creates or patches these files
 | `.vscode/settings.json`   | Excludes Unity binary/generated files from the file explorer; sets `dotnet.defaultSolution` |
 | `.vscode/launch.json`     | Adds an "Attach to Unity" debug configuration                                               |
 
-To prevent the package from patching an existing file, create a `.vstupatchdisable` file inside `.vscode/`.
+To prevent the package from patching an existing file, create a
+`.vstupatchdisable` file inside `.vscode/`.
 
 ## Reuse Existing Window
 
-When Antigravity is the active editor, a **"Reuse existing Antigravity window"** toggle appears in Preferences. When enabled, double-clicking a script opens it in the already-running Antigravity instance that has the project open, instead of launching a new window.
+When Antigravity IDE is the active editor, a
+**"Reuse existing Antigravity window"** toggle appears in Preferences. When
+enabled, double-clicking a script opens it in the already-running Antigravity
+IDE instance that has the project open, instead of launching a new window.
+
+Process matching and workspace storage scanning are both restricted to the
+**Antigravity IDE** product (process name `Antigravity IDE`, storage path
+`Antigravity IDE/User/workspaceStorage`). The standalone Antigravity agent
+app is never matched, even if it is also running.

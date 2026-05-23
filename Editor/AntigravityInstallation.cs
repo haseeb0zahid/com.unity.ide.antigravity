@@ -1,4 +1,4 @@
-﻿/*---------------------------------------------------------------------------------------------
+/*---------------------------------------------------------------------------------------------
  *  Copyright (c) BadranRaza.
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -41,9 +41,13 @@ namespace Microsoft.Unity.VisualStudio.Editor
 
         private string GetExtensionPath()
         {
-            // Antigravity stores extensions at ~/.antigravity/extensions (or ~/.antigravity-insiders for prerelease)
-            var antigravityFolder = IsPrerelease ? ".antigravity-insiders" : ".antigravity";
-            var extensionsPath = IOPath.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), antigravityFolder, "extensions");
+            // Since Antigravity 2.0 (I/O 2026) the IDE is a separate product from the standalone
+            // "Antigravity" agent app and stores extensions at ~/.antigravity-ide/extensions
+            // (or ~/.antigravity-ide-insiders for prerelease). The legacy ~/.antigravity path
+            // now belongs to the agent app and is intentionally ignored.
+            var folder = IsPrerelease ? ".antigravity-ide-insiders" : ".antigravity-ide";
+            var extensionsPath = IOPath.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), folder, "extensions");
+
             if (!Directory.Exists(extensionsPath))
                 return null;
 
@@ -72,12 +76,16 @@ namespace Microsoft.Unity.VisualStudio.Editor
 
         private static bool IsCandidateForDiscovery(string path)
         {
+            // Antigravity 2.0 (May 2026) split the product line: the standalone agent app keeps
+            // the "Antigravity" name while the VS Code-fork editor is now "Antigravity IDE".
+            // Only the IDE can act as a Unity script editor, so reject any path that does not
+            // match the IDE executable/bundle name.
 #if UNITY_EDITOR_OSX
-			return Directory.Exists(path) && Regex.IsMatch(path, ".*Antigravity.*.app$", RegexOptions.IgnoreCase);
+			return Directory.Exists(path) && Regex.IsMatch(path, ".*Antigravity IDE.*\\.app$", RegexOptions.IgnoreCase);
 #elif UNITY_EDITOR_WIN
-			return File.Exists(path) && Regex.IsMatch(path, ".*Antigravity.*.exe$", RegexOptions.IgnoreCase);
+			return File.Exists(path) && Regex.IsMatch(path, ".*Antigravity IDE.*\\.exe$", RegexOptions.IgnoreCase);
 #else
-            return File.Exists(path) && path.EndsWith("antigravity", StringComparison.OrdinalIgnoreCase);
+            return File.Exists(path) && (path.EndsWith("antigravity-ide", StringComparison.OrdinalIgnoreCase) || path.EndsWith("antigravity-ide-insiders", StringComparison.OrdinalIgnoreCase));
 #endif
         }
 
@@ -100,6 +108,7 @@ namespace Microsoft.Unity.VisualStudio.Editor
 
             Version version = null;
             var isPrerelease = false;
+            var manifestName = (string)null;
 
             try
             {
@@ -127,6 +136,7 @@ namespace Microsoft.Unity.VisualStudio.Editor
                     var manifest = JsonUtility.FromJson<VisualStudioCodeManifest>(File.ReadAllText(manifestFullPath));
                     Version.TryParse(manifest.version.Split('-').First(), out version);
                     isPrerelease = manifest.version.ToLower().Contains("insider");
+                    manifestName = manifest.name;
                 }
             }
             catch (Exception)
@@ -134,11 +144,19 @@ namespace Microsoft.Unity.VisualStudio.Editor
                 // do not fail if we are not able to retrieve the exact version number
             }
 
+            // The Antigravity 2.0 agent app and the Antigravity IDE share the same Code-fork
+            // package layout; the manifest "name" field is the authoritative way to tell them
+            // apart. Reject anything that isn't the IDE so Unity never tries to open scripts
+            // in the agent app (which has no editor surface).
+            if (!string.IsNullOrEmpty(manifestName) &&
+                manifestName.IndexOf("Antigravity IDE", StringComparison.OrdinalIgnoreCase) < 0)
+                return false;
+
             isPrerelease = isPrerelease || editorPath.ToLower().Contains("insider");
             installation = new AntigravityInstallation()
             {
                 IsPrerelease = isPrerelease,
-                Name = "Antigravity" + (isPrerelease ? " - Insider" : string.Empty) + (version != null ? $" [{version.ToString(3)}]" : string.Empty),
+                Name = "Antigravity IDE" + (isPrerelease ? " - Insider" : string.Empty) + (version != null ? $" [{version.ToString(3)}]" : string.Empty),
                 Path = editorPath,
                 Version = version ?? new Version()
             };
@@ -153,18 +171,31 @@ namespace Microsoft.Unity.VisualStudio.Editor
 #if UNITY_EDITOR_WIN
 			var localAppPath = IOPath.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Programs");
 			var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+			var programFilesX86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
 
-			foreach (var basePath in new[] { localAppPath, programFiles }) {
-				candidates.Add(IOPath.Combine(basePath, "antigravity", "Antigravity.exe"));
+			// Only the Antigravity IDE is a usable Unity script editor. The plain "Antigravity"
+			// install directory now hosts the standalone agent app (Antigravity 2.0) and must
+			// not be offered as a code editor.
+			foreach (var basePath in new[] { localAppPath, programFiles, programFilesX86 }) {
+				candidates.Add(IOPath.Combine(basePath, "Antigravity IDE", "Antigravity IDE.exe"));
+				candidates.Add(IOPath.Combine(basePath, "Google", "Antigravity IDE", "Antigravity IDE.exe"));
 			}
 #elif UNITY_EDITOR_OSX
 			var appPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-			candidates.AddRange(Directory.EnumerateDirectories(appPath, "Antigravity*.app"));
+			try {
+				candidates.AddRange(Directory.EnumerateDirectories(appPath, "Antigravity IDE*.app"));
+			} catch {}
+			try {
+				candidates.AddRange(Directory.EnumerateDirectories("/Applications", "Antigravity IDE*.app"));
+			} catch {}
 #elif UNITY_EDITOR_LINUX
 			// Well known locations
-			candidates.Add("/usr/bin/antigravity");
-			candidates.Add("/bin/antigravity");
-			candidates.Add("/usr/local/bin/antigravity");
+			candidates.Add("/usr/bin/antigravity-ide");
+			candidates.Add("/bin/antigravity-ide");
+			candidates.Add("/usr/local/bin/antigravity-ide");
+			candidates.Add("/usr/bin/antigravity-ide-insiders");
+			candidates.Add("/bin/antigravity-ide-insiders");
+			candidates.Add("/usr/local/bin/antigravity-ide-insiders");
 
 			// Preference ordered base directories relative to which desktop files should be searched
 			candidates.AddRange(GetXdgCandidates());
@@ -193,7 +224,9 @@ namespace Microsoft.Unity.VisualStudio.Editor
 
 				try
 				{
-					var desktopFile = IOPath.Combine(dir, "applications/antigravity.desktop");
+					var desktopFile = IOPath.Combine(dir, "applications/antigravity-ide.desktop");
+					if (!File.Exists(desktopFile))
+						desktopFile = IOPath.Combine(dir, "applications/antigravity-ide-insiders.desktop");
 					if (!File.Exists(desktopFile))
 						continue;
 
@@ -520,15 +553,16 @@ namespace Microsoft.Unity.VisualStudio.Editor
 
             var processes = new List<Process>();
 
-            // Get process name list based on different operating systems
+            // Only consider Antigravity IDE processes. The plain "Antigravity" process belongs
+            // to the standalone agent app (Antigravity 2.0) and never hosts an editor workspace.
 #if UNITY_EDITOR_OSX
-			processes.AddRange(Process.GetProcessesByName("Antigravity"));
-			processes.AddRange(Process.GetProcessesByName("Antigravity Helper"));
+			processes.AddRange(Process.GetProcessesByName("Antigravity IDE"));
+			processes.AddRange(Process.GetProcessesByName("Antigravity IDE Helper"));
 #elif UNITY_EDITOR_LINUX
-			processes.AddRange(Process.GetProcessesByName("antigravity"));
-			processes.AddRange(Process.GetProcessesByName("Antigravity"));
+			processes.AddRange(Process.GetProcessesByName("antigravity-ide"));
+			processes.AddRange(Process.GetProcessesByName("Antigravity IDE"));
 #else
-            processes.AddRange(Process.GetProcessesByName("antigravity"));
+            processes.AddRange(Process.GetProcessesByName("Antigravity IDE"));
 #endif
 
             foreach (var process in processes)

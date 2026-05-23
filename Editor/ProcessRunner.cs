@@ -128,12 +128,15 @@ namespace Microsoft.Unity.VisualStudio.Editor
                 var userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                 string antigravityStoragePath;
 
+                // Antigravity IDE keeps its workspace storage in a separate per-product
+                // directory ("Antigravity IDE") since the May 2026 split from the standalone
+                // "Antigravity" agent app — the latter's storage must not be scanned.
 #if UNITY_EDITOR_OSX
-				antigravityStoragePath = Path.Combine(userProfile, "Library", "Application Support", "Antigravity", "User", "workspaceStorage");
+				antigravityStoragePath = Path.Combine(userProfile, "Library", "Application Support", "Antigravity IDE", "User", "workspaceStorage");
 #elif UNITY_EDITOR_LINUX
-				antigravityStoragePath = Path.Combine(userProfile, ".config", "Antigravity", "User", "workspaceStorage");
+				antigravityStoragePath = Path.Combine(userProfile, ".config", "Antigravity IDE", "User", "workspaceStorage");
 #elif UNITY_EDITOR_WIN
-                antigravityStoragePath = Path.Combine(userProfile, "AppData", "Roaming", "Antigravity", "User", "workspaceStorage");
+                antigravityStoragePath = Path.Combine(userProfile, "AppData", "Roaming", "Antigravity IDE", "User", "workspaceStorage");
 #else
                 // Unsupported platform — return early to avoid uninitialized variable compiler error
                 return Array.Empty<string>();

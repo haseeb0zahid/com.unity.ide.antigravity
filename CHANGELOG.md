@@ -1,5 +1,31 @@
 # Code Editor Package for Antigravity — Changelog
 
+## [1.0.6] - 2026-05-23
+
+### Fixed
+
+- Unity no longer routes C# script opens to the standalone **Antigravity 2.0 agent app**. Google's I/O 2026 release split the product line into the agent-first "Antigravity" desktop app and the VS Code-fork "Antigravity IDE"; previously the package discovered both, so users with both installed could end up launching the agent app (which has no editor surface) on every script open.
+  - `IsCandidateForDiscovery` now requires `Antigravity IDE*.exe` / `Antigravity IDE*.app` / `antigravity-ide[-insiders]` filenames.
+  - `TryDiscoverInstallation` reads `resources/app/package.json` and rejects any install whose product name is not `Antigravity IDE` (defence-in-depth if a user points External Tools at the agent app manually).
+  - `GetVisualStudioInstallations` only lists IDE candidates; the plain `Antigravity.exe` / `antigravity` / `antigravity.desktop` paths were removed on Windows, macOS and Linux.
+  - Reuse-existing-window process matching no longer matches the agent app's `Antigravity` / `antigravity` process names.
+  - Workspace storage scan now reads `Antigravity IDE/User/workspaceStorage` (the IDE's new per-product AppData / `Application Support` / `.config` location) instead of the legacy `Antigravity/...` path that now belongs to the agent app.
+  - External script editor entries are always labelled `Antigravity IDE` — the ambiguous bare `Antigravity` display name was removed.
+
+### Changed
+
+- Insider builds (`Antigravity IDE - Insider.exe`, `antigravity-ide-insiders`, `Antigravity IDE - Insider*.app`) are now recognised on all three platforms.
+- Package display name updated to **Antigravity IDE Editor**; package description refreshed to mention the Antigravity 2.0 split explicitly.
+- Documentation (`README.md`, `Documentation~/index.md`, `Documentation~/using-visual-studio-editor.md`) updated to reflect the IDE rename, new install paths, and product-name detection.
+
+### License
+
+- **License changed from MIT to a dual license** starting with this release:
+  - Inherited upstream code originating from `com.unity.ide.vscode` (© Unity Technologies, © Microsoft Corporation) remains under the **MIT License**.
+  - All new contributions to this fork are released under the **[PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0)**.
+  - **Commercial use requires a separate commercial license** from the copyright holder. Open a GitHub issue at https://github.com/BadranRaza/com.unity.ide.antigravity/issues to start the conversation.
+  - Releases up to and including **v1.0.5 remain available under the original MIT License**; the new terms apply to v1.0.6 and later.
+
 ## [1.0.5] - 2026-03-09
 
 ### Fixed
