@@ -1,5 +1,18 @@
 # Code Editor Package for Antigravity — Changelog
 
+## [1.0.8] - 2026-05-23
+
+### Added
+
+- **Troubleshooting / FAQ section in README** answering the most common questions about the Antigravity 2.0 split: Unity opening the wrong app, the IDE not appearing in the dropdown, IntelliSense, reuse-window not working, and Insider build detection.
+- **Comparison table** in README listing the other community Antigravity Unity packages, their last push and Antigravity-2.0-fix status as of May 2026.
+- **Deep-dive doc** (`Documentation~/antigravity-2-0-fix.md`) explaining the I/O 2026 product split, why script opens started routing to the agent app, and the three-layer fix in this package (filename filter, manifest verification, narrowed search paths).
+- **GitHub issue forms**: bug report, feature request, plus a contact-links config that points open-ended questions at Discussions and Antigravity-IDE bugs at Google's forum.
+- **`PULL_REQUEST_TEMPLATE.md`** with a platform-tested checklist.
+- **`SECURITY.md`** with private vulnerability reporting instructions and an explicit in/out-of-scope list.
+- **`CODE_OF_CONDUCT.md`** adopting Contributor Covenant 3.0 (the version Django moved to in April 2026).
+- **`CITATION.cff`** so the repo gets the "Cite this repository" widget.
+
 ## [1.0.7] - 2026-05-23
 
 ### Changed
