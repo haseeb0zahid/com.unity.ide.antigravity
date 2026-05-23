@@ -5,8 +5,7 @@
 ### Changed
 
 - **License reverted to plain MIT.** The PolyForm Noncommercial dual-license briefly introduced in v1.0.6 has been rolled back. The entire package — including v1.0.7 and all earlier versions — is now uniformly governed by the MIT License again. No commercial-license step is required; use freely in personal, commercial and Asset Store projects.
-- README polished for discoverability: added release / Unity version / license / stars / forks badges, "Support the project" section, and a star-the-repo prompt.
-- Added GitHub `FUNDING.yml` so the repo shows a Sponsor button.
+- README polished for discoverability: added release / Unity version / license / stars / forks badges, "Support the project" section (star / share / issues / PRs), and a star-the-repo prompt.
 
 ## [1.0.6] - 2026-05-23
 

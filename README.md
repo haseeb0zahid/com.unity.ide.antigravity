@@ -111,9 +111,9 @@ If this package made your Unity + Antigravity IDE setup work:
 
 - ⭐ **Star the repository** — biggest single thing you can do to help
   others find it.
+- 🔁 Share the repo link with other Unity devs who use Antigravity IDE.
 - 💬 Open an issue or discussion if you hit a bug or have a feature request.
-- 💖 [Sponsor on GitHub](https://github.com/sponsors/BadranRaza) to support
-  continued maintenance.
+- 🔧 Pull requests welcome — see open issues for ideas.
 
 ## License
 
