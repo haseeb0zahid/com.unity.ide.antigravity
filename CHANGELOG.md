@@ -1,5 +1,27 @@
 # Code Editor Package for Antigravity — Changelog
 
+## [2.0.0] - 2026-05-23
+
+### ⚠️ BREAKING CHANGE — package renamed
+
+The package's UPM `name` field has changed from `com.unity.ide.antigravity` to **`com.badranraza.ide.antigravity`**.
+
+Why: the `com.unity.*` namespace is reserved by Unity Technologies, and OpenUPM rejects packages that use it. Renaming unblocks the OpenUPM listing (https://github.com/openupm/openupm/pull/6490 was closed for exactly this reason) and defends against any future Unity namespace enforcement. No Unity Technologies code is involved in this rename — only the UPM identifier.
+
+**Migrating from v1.x:**
+
+1. In Unity Package Manager, remove the old `com.unity.ide.antigravity` entry.
+2. Re-add via the same git URL: `https://github.com/BadranRaza/com.unity.ide.antigravity.git`. Package Manager will install it under the new `com.badranraza.ide.antigravity` name.
+3. Your External Tools selection in `Edit > Preferences > External Tools` survives the rename. No code changes are required in your Unity projects.
+
+The GitHub repo URL is unchanged — only the UPM package identifier inside `package.json` changed.
+
+### Changed
+
+- `package.json` `name`: `com.unity.ide.antigravity` → `com.badranraza.ide.antigravity`.
+- `CITATION.cff` `version`: 1.0.7 → 2.0.0.
+- All Antigravity IDE detection, FAQ, deep-dive doc, issue templates and trust files shipped in v1.0.6–v1.0.8 are carried forward unchanged.
+
 ## [1.0.8] - 2026-05-23
 
 ### Added

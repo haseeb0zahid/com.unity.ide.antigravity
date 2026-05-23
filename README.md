@@ -50,11 +50,20 @@ Install via Unity Package Manager using the git URL:
    ```
 4. Click **Add**
 
-The package will appear in Package Manager and can be updated from there when
-new versions are released.
+The package will appear in Package Manager under the name
+**`com.badranraza.ide.antigravity`** and can be updated from there when new
+versions are released.
 
 > **Alternative**: if you cloned the repo locally, use
 > `+ → Add package from disk...` and point to the `package.json`.
+
+> **Upgrading from v1.x?** v2.0.0 renamed the UPM `name` field from
+> `com.unity.ide.antigravity` to `com.badranraza.ide.antigravity` (the old
+> name used Unity's reserved `com.unity.*` namespace and was rejected by
+> OpenUPM). To upgrade: in Package Manager, remove the old
+> `com.unity.ide.antigravity` entry and re-add via the same git URL above.
+> Your External Tools selection survives the rename. The GitHub repo URL
+> is unchanged.
 
 ## Configuration
 
